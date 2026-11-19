@@ -1,5 +1,7 @@
 package diana;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
@@ -35,6 +37,8 @@ public class SettingsWindow extends JFrame {
 
     private final JComboBox<String> keyBox;
 
+    private final JLabel preview = new JLabel();
+
     private final Map<String, Integer> keyMap = new LinkedHashMap<>();
 
     public SettingsWindow(FontSettings settings, LauncherWindow launcher) {
@@ -42,7 +46,7 @@ public class SettingsWindow extends JFrame {
         this.settings = settings;
         this.launcher = launcher;
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setSize(420, 300);
+        setSize(420, 380);
         setLocationRelativeTo(null);
 
         String[] mods = {"None", "Ctrl", "Alt", "Shift"};
@@ -53,54 +57,70 @@ public class SettingsWindow extends JFrame {
             }
         }
 
-        JPanel root = new JPanel(new GridLayout(7, 2, 8, 8));
-        root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        JPanel grid = new JPanel(new GridLayout(7, 2, 8, 8));
 
-        root.add(new JLabel("Font family:"));
+        grid.add(new JLabel("Font family:"));
         familyBox = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
         familyBox.setSelectedItem(settings.getFamily());
         familyBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) apply();
         });
-        root.add(familyBox);
+        grid.add(familyBox);
 
-        root.add(new JLabel("Font size:"));
+        grid.add(new JLabel("Font size:"));
         sizeSpinner = new JSpinner(new SpinnerNumberModel(settings.getSize(), 8, 48, 1));
         sizeSpinner.addChangeListener(e -> apply());
-        root.add(sizeSpinner);
+        grid.add(sizeSpinner);
 
-        root.add(new JLabel("Window width:"));
+        grid.add(new JLabel("Window width:"));
         widthSpinner = new JSpinner(new SpinnerNumberModel(settings.getWidth(), 240, 1200, 10));
         widthSpinner.addChangeListener(e -> apply());
-        root.add(widthSpinner);
+        grid.add(widthSpinner);
 
-        root.add(new JLabel("List display:"));
+        grid.add(new JLabel("List display:"));
         fullPathBox = new JCheckBox("Show full path", settings.isShowFullPath());
         fullPathBox.addItemListener(e -> apply());
-        root.add(fullPathBox);
+        grid.add(fullPathBox);
 
-        root.add(new JLabel("Scan locations:"));
+        grid.add(new JLabel("Scan locations:"));
         scanButton = new JButton("Edit...");
         scanButton.addActionListener(e -> editScanLocations());
-        root.add(scanButton);
+        grid.add(scanButton);
 
-        root.add(new JLabel("Hotkey modifier:"));
+        grid.add(new JLabel("Hotkey modifier:"));
         modifierBox = new JComboBox<>(mods);
         modifierBox.setSelectedItem(modToName(settings.getHotkeyModifier()));
         modifierBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) apply();
         });
-        root.add(modifierBox);
+        grid.add(modifierBox);
 
-        root.add(new JLabel("Hotkey key:"));
+        grid.add(new JLabel("Hotkey key:"));
         keyBox = new JComboBox<>(keyMap.keySet().toArray(new String[0]));
         keyBox.setSelectedItem(keyToName(settings.getHotkeyKey()));
         keyBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) apply();
         });
-        root.add(keyBox);
+        grid.add(keyBox);
+
+        preview.setText("Diana ダイアナ あいうえお ABC abc 0123");
+        preview.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+
+        JPanel previewPanel = new JPanel(new BorderLayout());
+        previewPanel.setBorder(BorderFactory.createTitledBorder("Preview"));
+        previewPanel.add(preview, BorderLayout.CENTER);
+
+        JPanel root = new JPanel(new BorderLayout(0, 10));
+        root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        root.add(grid, BorderLayout.CENTER);
+        root.add(previewPanel, BorderLayout.SOUTH);
 
         setContentPane(root);
+        updatePreview();
+    }
+
+    private void updatePreview() {
+        preview.setFont(settings.font(Font.PLAIN));
     }
 
     private void apply() {
@@ -114,6 +134,7 @@ public class SettingsWindow extends JFrame {
         launcher.applyHotkey(settings);
         launcher.applyWidth(settings.getWidth());
         launcher.applyDisplay();
+        updatePreview();
     }
 
     private void editScanLocations() {

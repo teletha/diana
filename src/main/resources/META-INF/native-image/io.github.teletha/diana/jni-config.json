@@ -1,0 +1,1088 @@
+[
+    {
+        "name":  "java.awt.AlphaComposite",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.AWTError",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.AWTEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Button",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Canvas",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.CheckboxGroup",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Color",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.color.CMMException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.color.ColorSpace",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Component",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Composite",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Container",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Cursor",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.datatransfer.Transferable",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.desktop.UserSessionEvent$Reason",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Dialog",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Dimension",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.DisplayMode",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.dnd.InvalidDnDOperationException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.ActionEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.ComponentEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.InputEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.KeyEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.MouseEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.event.MouseWheelEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.FileDialog",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Font",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.FontMetrics",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Frame",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.AffineTransform",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.GeneralPath",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.Path2D",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.Path2D$Float",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.Point2D$Float",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.geom.Rectangle2D$Float",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.GraphicsConfiguration",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.GraphicsEnvironment",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.IllegalComponentStateException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.ColorModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.ComponentColorModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.DataBuffer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.DirectColorModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.IndexColorModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.PackedColorModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.SampleModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.SinglePixelPackedSampleModel",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.image.WritableRaster",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Insets",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.LayoutManager",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Menu",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.MenuItem",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.peer.ComponentPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.peer.FontPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Point",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.PopupMenu",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.print.PageFormat",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.print.Paper",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.print.PrinterException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.print.PrinterJob",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Rectangle",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.ScrollPaneAdjustable",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.SequencedEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.SystemColor",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Taskbar$State",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Toolkit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Window",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.awt.Window$Type",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.lang.Boolean",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.lang.Enum",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.lang.Thread",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "java.util.Locale",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.AppContext",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.AWTAutoShutdown",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.datatransfer.DataTransferer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.EmbeddedFrame",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.ExtendedKeyCodes",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.FontConfiguration",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.FontDescriptor",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.im.InputMethodWindow",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.BufImgSurfaceData$ICMColorData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.ByteComponentRaster",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.BytePackedRaster",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.ImageFormatException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.IntegerComponentRaster",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.ShortComponentRaster",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.SunVolatileImage",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.image.VolatileSurfaceManager",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.LightweightFrame",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.PlatformFont",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.shell.ShellFolderColumnInfo",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.shell.Win32ShellFolder2$KnownFolderDefinition",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.SunHints",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.SunToolkit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.TimedWindowEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.UngrabEvent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.Win32ColorModel24",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.Win32GraphicsConfig",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.Win32GraphicsDevice",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.Win32GraphicsEnvironment",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WComponentPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WDesktopPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WDesktopProperties",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WDragSourceContextPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WDropTargetContextPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WEmbeddedFrame",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WFontPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WFramePeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WGlobalCursorManager",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WInputMethod",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WMenuItemPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WObjectPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WPanelPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WPrintDialogPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WPrinterJob",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WToolkit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WTrayIconPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.awt.windows.WWindowPeer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.CharToGlyphMapper",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.Font2D",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.FontStrike",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.FontUtilities",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.GlyphLayout$GVData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.GlyphList",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.PhysicalStrike",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.StrikeMetrics",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.TrueTypeFont",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.font.Type1Font",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.d3d.D3DGraphicsDevice$1",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.d3d.D3DRenderQueue$1",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.d3d.D3DSurfaceData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.d3d.D3DSurfaceData$1",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.d3d.D3DSurfaceData$D3DWindowSurfaceData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.Disposer",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.InvalidPipeException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.Blit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.BlitBg",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.CompositeType",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawGlyphList",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawGlyphListAA",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawGlyphListLCD",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawLine",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawParallelogram",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawPath",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawPolygons",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.DrawRect",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.FillParallelogram",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.FillPath",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.FillRect",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.FillSpans",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.GraphicsPrimitive",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.GraphicsPrimitiveMgr",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.MaskBlit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.MaskFill",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.ScaledBlit",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.SurfaceType",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.TransformHelper",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.loops.XORComposite",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.NullSurfaceData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.opengl.OGLGraphicsConfig",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.opengl.OGLSurfaceData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.pipe.Region",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.pipe.RegionIterator",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.SunGraphics2D",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.SurfaceData",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.windows.WindowsFlags",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "[Ljava.util.Locale;"
+    },
+    {
+        "name":  "[Lsun.java2d.loops.GraphicsPrimitive;"
+    },
+    {
+        "name":  "javax.print.attribute.PrintRequestAttributeSet",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.swing.Popup$HeavyWeightWindow",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "com.sun.java.swing.plaf.windows.WindowsPopupWindow",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleContext",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleComponent",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleAction",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleSelection",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleText",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleValue",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleTable",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleHypertext",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.accessibility.AccessibleHyperlink",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.swing.text.AttributeSet",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "javax.imageio.IIOException",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    },
+    {
+        "name":  "sun.java2d.pipe.ShapeSpanIterator",
+        "allDeclaredMethods":  true,
+        "allDeclaredFields":  true,
+        "allDeclaredConstructors":  true
+    }
+]

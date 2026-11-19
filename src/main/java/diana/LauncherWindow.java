@@ -8,10 +8,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.foreign.Arena;
@@ -28,11 +30,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,15 +50,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
 
 public class LauncherWindow extends JFrame {
     private static final String[] COMMANDS = {"/config", "/exit", "/scan"};
     private static final int MIN_WIDTH = 240;
     private static final int MAX_WIDTH = 1200;
+    private static final int GAP = 8;
+    private static final int LIST_HEIGHT = 148;
 
     private final JTextField input = new JTextField();
 
@@ -71,6 +85,25 @@ public class LauncherWindow extends JFrame {
 
     private final Map<String, Icon> iconCache = new ConcurrentHashMap<>();
 
+    private final Set<String> loadingIcons = ConcurrentHashMap.newKeySet();
+
+    /**
+     * Placeholder shown while a shell icon is resolved in the background. It is
+     * transparent but keeps the cell layout stable.
+     */
+    private static final Icon PLACEHOLDER_ICON = new ImageIcon(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB));
+
+    /**
+     * Extracting an icon from the Windows shell can take seconds or block on
+     * unavailable devices, so it must never run on the event dispatch thread.
+     */
+    private final ExecutorService iconLoader = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "application-icon-loader");
+        t.setDaemon(true);
+        t.setPriority(Thread.MIN_PRIORITY);
+        return t;
+    });
+
     private List<Path> currentResults = List.of();
 
     private List<String> currentCommands = List.of();
@@ -86,14 +119,14 @@ public class LauncherWindow extends JFrame {
         setUndecorated(true);
         setAlwaysOnTop(true);
         setType(Window.Type.UTILITY);
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(UIManager.getColor("Panel.background"));
         setSize(windowWidth(), 56);
-        getRootPane().setOpaque(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         index.start();
 
         input.setBorder(new EmptyBorder(6, 10, 6, 10));
+        silenceDeleteBeep(input);
         input.addActionListener(e -> executeSelectedOrInput());
         input.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -164,8 +197,10 @@ public class LauncherWindow extends JFrame {
         scroll.setVisible(false);
 
         status.setForeground(new Color(0xAAAAAA));
+        status.setBorder(new EmptyBorder(3, 10, 5, 10));
+        status.setVisible(false);
 
-        JPanel root = new JPanel(new BorderLayout(8, 8));
+        JPanel root = new JPanel(new BorderLayout(GAP, GAP));
         root.setOpaque(false);
         root.add(input, BorderLayout.NORTH);
         root.add(scroll, BorderLayout.CENTER);
@@ -173,6 +208,32 @@ public class LauncherWindow extends JFrame {
         setContentPane(root);
 
         applyFont(fontSettings);
+        updateSize();
+    }
+
+    /**
+     * Sizes the window to the visible parts only. The status line is hidden
+     * when it has nothing to show, so no empty strip is left below the list.
+     */
+    private void updateSize() {
+        setSize(windowWidth(), contentHeight());
+    }
+
+    private int contentHeight() {
+        int height = input.getPreferredSize().height;
+        if (scroll.isVisible()) {
+            height += GAP + LIST_HEIGHT;
+        }
+        if (status.isVisible()) {
+            height += GAP + status.getPreferredSize().height;
+        }
+        return height;
+    }
+
+    private void setStatus(String text) {
+        status.setText(text);
+        status.setVisible(text != null && !text.isBlank());
+        updateSize();
     }
 
     public void toggle() {
@@ -182,10 +243,49 @@ public class LauncherWindow extends JFrame {
             showLauncher();
     }
 
+    /**
+     * Swing asks the look and feel to beep when Backspace or Delete is pressed
+     * although there is nothing to remove. Replace those actions with silent
+     * variants, keeping the original behavior whenever something can be
+     * deleted.
+     */
+    private static void silenceDeleteBeep(JTextField field) {
+        ActionMap actions = field.getActionMap();
+        if (actions == null) {
+            return;
+        }
+        Action deletePrevious = actions.get(DefaultEditorKit.deletePrevCharAction);
+        Action deleteNext = actions.get(DefaultEditorKit.deleteNextCharAction);
+        ActionMap map = new ActionMap();
+        map.setParent(actions);
+        if (deletePrevious != null) {
+            map.put(DefaultEditorKit.deletePrevCharAction, silentDelete(deletePrevious, false));
+        }
+        if (deleteNext != null) {
+            map.put(DefaultEditorKit.deleteNextCharAction, silentDelete(deleteNext, true));
+        }
+        field.setActionMap(map);
+    }
+
+    private static Action silentDelete(Action original, boolean forward) {
+        return new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextComponent target = (JTextComponent) e.getSource();
+                boolean selection = target.getSelectionStart() != target.getSelectionEnd();
+                boolean removable = forward ? target.getCaretPosition() < target.getDocument().getLength()
+                        : target.getCaretPosition() > 0;
+                if (selection || removable) {
+                    original.actionPerformed(e);
+                }
+            }
+        };
+    }
+
     public void showLauncher() {
         // clearing the text also resets the result list and the window size via refresh()
         input.setText("");
-        status.setText(" ");
+        setStatus(" ");
         setLocationRelativeTo(null);
         Point loc = getLocation();
         setLocation(loc.x, loc.y - 100);
@@ -248,7 +348,9 @@ public class LauncherWindow extends JFrame {
         Font f = settings.font(Font.PLAIN);
         input.setFont(f);
         resultList.setFont(f);
+        resultList.setFixedCellHeight(Math.max(24, resultList.getFontMetrics(f).getHeight() + 6));
         status.setFont(f);
+        updateSize();
     }
 
     public void applyDisplay() {
@@ -258,7 +360,7 @@ public class LauncherWindow extends JFrame {
     public void applyWidth(int width) {
         int w = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, width));
         scroll.setPreferredSize(new Dimension(Math.max(200, w - 24), 120));
-        setSize(w, scroll.isVisible() ? 208 : 56);
+        setSize(w, contentHeight());
         revalidate();
     }
 
@@ -269,14 +371,26 @@ public class LauncherWindow extends JFrame {
     private Icon iconFor(Path path) {
         String key = path.toString().toLowerCase(Locale.ROOT);
         Icon icon = iconCache.get(key);
-        if (icon == null) {
-            try {
-                icon = FileSystemView.getFileSystemView().getSystemIcon(path.toFile(), 16, 16);
-            } catch (Exception ignored) {
-            }
-            if (icon != null) iconCache.put(key, icon);
+        if (icon != null) {
+            return icon;
         }
-        return icon;
+        if (loadingIcons.add(key)) {
+            File file = path.toFile();
+            iconLoader.execute(() -> loadIcon(key, file));
+        }
+        return PLACEHOLDER_ICON;
+    }
+
+    private void loadIcon(String key, File file) {
+        try {
+            Icon icon = FileSystemView.getFileSystemView().getSystemIcon(file, 16, 16);
+            iconCache.put(key, icon != null ? icon : PLACEHOLDER_ICON);
+            SwingUtilities.invokeLater(resultList::repaint);
+        } catch (Throwable ignored) {
+            iconCache.put(key, PLACEHOLDER_ICON);
+        } finally {
+            loadingIcons.remove(key);
+        }
     }
 
     public void applyHotkey(FontSettings settings) {
@@ -310,7 +424,7 @@ public class LauncherWindow extends JFrame {
             currentResults = List.of();
             currentCommands = List.of();
             scroll.setVisible(false);
-            setSize(windowWidth(), 56);
+            updateSize();
         } else {
             if (commandMode) {
                 currentResults = List.of();
@@ -323,7 +437,7 @@ public class LauncherWindow extends JFrame {
             }
             scroll.setVisible(true);
             if (!listModel.isEmpty()) resultList.setSelectedIndex(0);
-            setSize(windowWidth(), 208);
+            updateSize();
         }
         revalidate();
     }
@@ -368,8 +482,8 @@ public class LauncherWindow extends JFrame {
 
     private void rescan() {
         input.setText("");
-        status.setText("Scanning...");
-        index.rescan(() -> status.setText("Scanned " + index.size() + " items"));
+        setStatus("Scanning...");
+        index.rescan(() -> setStatus("Scanned " + index.size() + " items"));
     }
 
     private void execute(String target) {
@@ -387,7 +501,7 @@ public class LauncherWindow extends JFrame {
             }
             hideLauncher();
         } catch (Exception e) {
-            status.setText("Error: " + e);
+            setStatus("Error: " + e);
         }
     }
 

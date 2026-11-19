@@ -18,5 +18,7 @@ public class Project extends bee.api.Project {
         require("io.github.teletha", "sinobu");
         require("io.github.teletha", "psychopath");
         require("com.formdev", "flatlaf");
+
+        config(bee.task.FindMain.class, main -> main.main = "diana.Diana");
     }
 }

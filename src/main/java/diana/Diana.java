@@ -6,6 +6,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 public class Diana {
     public static void main(String[] args) {
+        Bootstrap.initialize();
         SwingUtilities.invokeLater(() -> {
             try {
                 FlatDarkLaf.setup();
@@ -15,12 +16,7 @@ public class Diana {
             GlobalKeyboardHook hook = new GlobalKeyboardHook();
             window.setHook(hook);
             hook.setHotkey(window.getFontSettings().getHotkeyModifier(), window.getFontSettings().getHotkeyKey());
-            hook.start(() -> {
-                try {
-                    SwingUtilities.invokeAndWait(window::toggle);
-                } catch (Exception ignored) {
-                }
-            });
+            hook.start(() -> SwingUtilities.invokeLater(window::toggle));
         });
     }
 }
