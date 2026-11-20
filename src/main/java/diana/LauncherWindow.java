@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -24,6 +26,7 @@ import java.lang.foreign.SymbolLookup;
 import java.lang.foreign.ValueLayout;
 import java.lang.invoke.MethodHandle;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -59,11 +62,29 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 public class LauncherWindow extends JFrame {
-    private static final String[] COMMANDS = {"/config", "/exit", "/scan"};
+    private static final String[] COMMANDS = {"/a", "/config", "/exit", "/g", "/scan"};
+
+    /**
+     * Commands that open a web search page for the text following them, such as
+     * {@code /a keyboard} or {@code /g java 25}.
+     */
+    private static final List<WebSearchCommand> WEB_SEARCHES = List.of(
+            new WebSearchCommand("/a", "Amazon", "https://www.amazon.co.jp/s?k="),
+            new WebSearchCommand("/g", "Google", "https://www.google.co.jp/search?q="));
     private static final int MIN_WIDTH = 240;
     private static final int MAX_WIDTH = 1200;
     private static final int GAP = 8;
     private static final int LIST_HEIGHT = 148;
+
+    private static final int WM_IME_CONTROL = 0x0283;
+
+    private static final int IMC_SETOPENSTATUS = 0x0006;
+
+    private static final int SMTO_BLOCK = 0x0001;
+
+    private static final int SMTO_ABORTIFHUNG = 0x0002;
+
+    private static final int IME_TIMEOUT_MILLIS = 200;
 
     private final JTextField input = new JTextField();
 
@@ -101,6 +122,17 @@ public class LauncherWindow extends JFrame {
         Thread t = new Thread(r, "application-icon-loader");
         t.setDaemon(true);
         t.setPriority(Thread.MIN_PRIORITY);
+        return t;
+    });
+
+    /**
+     * Switching the IME needs a synchronous message to the IME window. Run it
+     * off the event dispatch thread so a slow or unresponsive IME can never
+     * freeze the launcher.
+     */
+    private final ExecutorService imeSwitcher = Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "ime-switcher");
+        t.setDaemon(true);
         return t;
     });
 
@@ -158,6 +190,12 @@ public class LauncherWindow extends JFrame {
                     e.consume();
                 }
                 }
+            }
+        });
+        input.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                imeSwitcher.execute(LauncherWindow.this::disableIme);
             }
         });
         addWindowFocusListener(new WindowAdapter() {
@@ -304,6 +342,54 @@ public class LauncherWindow extends JFrame {
         });
     }
 
+    private MemorySegment windowTitle(Arena arena) {
+        byte[] bytes = (getTitle() + "\0").getBytes(StandardCharsets.UTF_16LE);
+        MemorySegment title = arena.allocate(bytes.length);
+        MemorySegment.copy(bytes, 0, title, ValueLayout.JAVA_BYTE, 0, bytes.length);
+        return title;
+    }
+
+    /**
+     * Windows keeps the previous input mode when the launcher opens, so the
+     * first keystrokes may be converted to kana. Turn the IME off when the input
+     * gains focus so commands start in direct input mode. The user can still
+     * switch the IME back on to enter Japanese text such as a search query.
+     *
+     * <p>
+     * {@code ImmSetOpenStatus} only works on the thread that created the input
+     * context, which is AWT's native window thread rather than the one calling
+     * this method. Sending {@code WM_IME_CONTROL} to the IME window works from
+     * any thread. It runs in the background and with a timeout so a hung IME
+     * cannot block the launcher.
+     * </p>
+     */
+    private void disableIme() {
+        try (Arena arena = Arena.ofConfined()) {
+            Linker linker = Linker.nativeLinker();
+            SymbolLookup user32 = SymbolLookup.libraryLookup("user32.dll", arena);
+            SymbolLookup imm32 = SymbolLookup.libraryLookup("imm32.dll", arena);
+            MethodHandle findWindow = linker.downcallHandle(user32.find("FindWindowW").get(), FunctionDescriptor
+                    .of(ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS));
+            MethodHandle getImeWindow = linker.downcallHandle(imm32.find("ImmGetDefaultIMEWnd").get(), FunctionDescriptor
+                    .of(ValueLayout.ADDRESS, ValueLayout.ADDRESS));
+            MethodHandle sendMessageTimeout = linker.downcallHandle(user32.find("SendMessageTimeoutW").get(),
+                    FunctionDescriptor.of(ValueLayout.JAVA_LONG, ValueLayout.ADDRESS, ValueLayout.JAVA_INT,
+                            ValueLayout.JAVA_LONG, ValueLayout.JAVA_LONG, ValueLayout.JAVA_INT,
+                            ValueLayout.JAVA_INT, ValueLayout.ADDRESS));
+
+            MemorySegment hwnd = (MemorySegment) findWindow.invoke(MemorySegment.NULL, windowTitle(arena));
+            if (hwnd.address() == 0) return;
+
+            MemorySegment imeWindow = (MemorySegment) getImeWindow.invoke(hwnd);
+            if (imeWindow.address() == 0) return;
+
+            sendMessageTimeout.invoke(imeWindow, WM_IME_CONTROL, (long) IMC_SETOPENSTATUS, 0L,
+                    SMTO_BLOCK | SMTO_ABORTIFHUNG, IME_TIMEOUT_MILLIS, MemorySegment.NULL);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
+
     /**
      * Windows refuses to hand the foreground to a window of another process, so
      * the keyboard input keeps going to the previous window. Pressing Alt just
@@ -320,11 +406,7 @@ public class LauncherWindow extends JFrame {
             MethodHandle keybd = linker.downcallHandle(user32.find("keybd_event").get(), FunctionDescriptor
                     .ofVoid(ValueLayout.JAVA_BYTE, ValueLayout.JAVA_BYTE, ValueLayout.JAVA_INT, ValueLayout.JAVA_LONG));
 
-            byte[] bytes = (getTitle() + "\0").getBytes(StandardCharsets.UTF_16LE);
-            MemorySegment title = arena.allocate(bytes.length);
-            MemorySegment.copy(bytes, 0, title, ValueLayout.JAVA_BYTE, 0, bytes.length);
-
-            MemorySegment hwnd = (MemorySegment) findWindow.invoke(MemorySegment.NULL, title);
+            MemorySegment hwnd = (MemorySegment) findWindow.invoke(MemorySegment.NULL, windowTitle(arena));
             if (hwnd.address() == 0) return;
 
             keybd.invoke((byte) 0x12, (byte) 0, 0, 0L); // VK_MENU down
@@ -415,6 +497,26 @@ public class LauncherWindow extends JFrame {
         settingsWindow.toFront();
     }
 
+    private record WebSearchCommand(String command, String site, String urlPrefix) {
+    }
+
+    private record WebSearch(WebSearchCommand command, String query) {
+    }
+
+    /**
+     * Returns the web search command matching the beginning of {@code text}, or
+     * {@code null} when no command applies.
+     */
+    private static WebSearch findWebSearch(String text) {
+        for (WebSearchCommand command : WEB_SEARCHES) {
+            String prefix = command.command() + " ";
+            if (text.regionMatches(true, 0, prefix, 0, prefix.length())) {
+                return new WebSearch(command, text.substring(prefix.length()).trim());
+            }
+        }
+        return null;
+    }
+
     private void refresh() {
         String q = input.getText().trim();
         listModel.clear();
@@ -428,8 +530,14 @@ public class LauncherWindow extends JFrame {
         } else {
             if (commandMode) {
                 currentResults = List.of();
-                currentCommands = Arrays.stream(COMMANDS).filter(c -> c.startsWith(q.toLowerCase())).toList();
-                currentCommands.forEach(listModel::addElement);
+                WebSearch search = findWebSearch(q);
+                if (search != null) {
+                    currentCommands = List.of();
+                    listModel.addElement("Search " + search.command().site() + " for \"" + search.query() + "\"");
+                } else {
+                    currentCommands = Arrays.stream(COMMANDS).filter(c -> c.startsWith(q.toLowerCase())).toList();
+                    currentCommands.forEach(listModel::addElement);
+                }
             } else {
                 currentCommands = List.of();
                 currentResults = index.search(q, 30);
@@ -454,6 +562,12 @@ public class LauncherWindow extends JFrame {
         String text = input.getText().trim();
         int idx = resultList.getSelectedIndex();
 
+        WebSearch search = findWebSearch(text);
+        if (search != null) {
+            execute(search.command().urlPrefix() + URLEncoder.encode(search.query(), StandardCharsets.UTF_8));
+            return;
+        }
+
         String cmd = text;
         if (commandMode && idx >= 0 && idx < currentCommands.size()) cmd = currentCommands.get(idx);
         cmd = cmd.toLowerCase();
@@ -470,6 +584,12 @@ public class LauncherWindow extends JFrame {
         if (cmd.equals("/scan")) {
             rescan();
             return;
+        }
+        for (WebSearchCommand command : WEB_SEARCHES) {
+            if (cmd.equals(command.command())) {
+                setStatus("Enter a search query after " + command.command());
+                return;
+            }
         }
 
         String target = !commandMode && idx >= 0 && idx < currentResults.size() ? currentResults.get(idx).toString() : text;
