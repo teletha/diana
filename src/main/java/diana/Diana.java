@@ -6,6 +6,12 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 public class Diana {
     public static void main(String[] args) {
+        try {
+            SingleInstance.acquire();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            return;
+        }
         Bootstrap.initialize();
         SwingUtilities.invokeLater(() -> {
             try {
